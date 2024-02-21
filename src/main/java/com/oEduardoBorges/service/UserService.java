@@ -1,11 +1,9 @@
 package com.oEduardoBorges.service;
 
 import com.oEduardoBorges.dto.request.user.UserRequestUpdate;
-import com.oEduardoBorges.dto.response.tela.TelaResponse;
 import com.oEduardoBorges.dto.response.user.UserResponse;
 import com.oEduardoBorges.dto.response.user.UserRoleResponse;
 import com.oEduardoBorges.model.Role;
-import com.oEduardoBorges.model.Tela;
 import com.oEduardoBorges.model.User;
 import com.oEduardoBorges.repository.RoleRepository;
 import com.oEduardoBorges.repository.UserRepository;
@@ -70,6 +68,7 @@ public class UserService {
         return telaById.map(UserRoleResponse::new);
     }
 
+    @Transactional
     public void addRoleToUser(Long userId, Long roleId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
@@ -80,6 +79,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
     public void removeRoleFromUser(Long userId, Long roleId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));

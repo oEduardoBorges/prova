@@ -10,6 +10,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.DELETE;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -38,6 +42,15 @@ public class SecurityConfiguration {
                 "/swagger-ui.html"
         )
         .permitAll()
+        .requestMatchers(DELETE, "/user/**").hasAnyAuthority("ROLE_ADMIN")
+            .requestMatchers(PUT, "/user/**").hasAnyAuthority("ROLE_ADMIN")
+            .requestMatchers(POST, "/user/**").hasAnyAuthority("ROLE_ADMIN")
+        .requestMatchers(DELETE, "/role/**").hasAnyAuthority("ROLE_ADMIN")
+          .requestMatchers(PUT, "/role/**").hasAnyAuthority("ROLE_ADMIN")
+            .requestMatchers(POST, "/role/**").hasAnyAuthority("ROLE_ADMIN")
+        .requestMatchers(DELETE, "/tela/**").hasAnyAuthority("ROLE_ADMIN")
+            .requestMatchers(PUT, "/tela/**").hasAnyAuthority("ROLE_ADMIN")
+              .requestMatchers(POST, "/tela/**").hasAnyAuthority("ROLE_ADMIN")
         .anyRequest()
         .authenticated()
         .and()

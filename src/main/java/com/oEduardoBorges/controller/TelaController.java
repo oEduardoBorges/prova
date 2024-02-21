@@ -7,6 +7,7 @@ import com.oEduardoBorges.service.TelaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,17 +30,20 @@ public class TelaController {
         return ResponseEntity.status(HttpStatus.OK).body(telaService.findTelaById(id));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<TelaResponse> createTela(@RequestBody TelaRequest telaRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(telaService.createTela(telaRequest));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<TelaResponse> telaUpdate(@PathVariable Long id, @RequestBody TelaRequest telaRequest){
         TelaResponse telaResponse = telaService.telaUpdate(id, telaRequest);
         return ResponseEntity.status(HttpStatus.OK).body(telaResponse);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         telaService.delete(id);

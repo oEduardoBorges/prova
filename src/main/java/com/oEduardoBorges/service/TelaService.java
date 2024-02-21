@@ -32,6 +32,7 @@ public class TelaService {
         return telaById.map(TelaResponse::new);
     }
 
+    @Transactional
     public TelaResponse createTela(TelaRequest telaRequest) {
         boolean exists = telaRepository.existsByName(telaRequest.getName());
 

@@ -32,6 +32,7 @@ public class RoleService {
         return roleById.map(RoleResponse::new);
     }
 
+    @Transactional
     public RoleResponse createRole(RoleRequest roleRequest) {
         boolean exists = roleRepository.existsByAuthority(roleRequest.getAuthority());
 

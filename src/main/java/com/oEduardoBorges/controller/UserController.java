@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -33,12 +34,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(users);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<UserResponse> userUpdate(@PathVariable Long id, @RequestBody UserRequestUpdate userRequest){
         UserResponse userResponse = userService.userUpdate(id, userRequest);
         return ResponseEntity.status(HttpStatus.OK).body(userResponse);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         userService.delete(id);
@@ -50,12 +53,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findUserRoleById(id));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{userId}/roles/{roleId}")
     public ResponseEntity<String> addRoleToUser(@PathVariable Long userId, @PathVariable Long roleId) {
         userService.addRoleToUser(userId, roleId);
         return ResponseEntity.status(HttpStatus.OK).body("Role added to user successfully");
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{userId}/roles/{roleId}")
     public ResponseEntity<String> removeRoleFromUser(@PathVariable Long userId, @PathVariable Long roleId) {
         userService.removeRoleFromUser(userId, roleId);
