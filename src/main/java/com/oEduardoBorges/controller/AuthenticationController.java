@@ -4,6 +4,7 @@ import com.oEduardoBorges.dto.request.AuthenticationRequest;
 import com.oEduardoBorges.dto.response.AuthenticationResponse;
 import com.oEduardoBorges.service.AuthenticationService;
 import com.oEduardoBorges.dto.request.RegisterRequest;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ public class AuthenticationController {
   ) {
     return ResponseEntity.ok(service.register(request));
   }
+
   @PostMapping("/authenticate")
   public ResponseEntity<AuthenticationResponse> authenticate(
       @RequestBody AuthenticationRequest request

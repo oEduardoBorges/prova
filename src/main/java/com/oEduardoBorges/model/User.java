@@ -4,7 +4,9 @@ import com.oEduardoBorges.dto.request.user.UserRequestUpdate;
 import jakarta.persistence.*;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,12 +30,15 @@ public class User implements UserDetails {
   private String username;
   private String password;
 
-  @Enumerated(EnumType.STRING)
-  private Role role;
+  @ManyToMany
+  @JoinTable(name = "tb_user_role",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "role_id"))
+  private Set<Role> roles = new HashSet<>();
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return List.of(new SimpleGrantedAuthority(role.name()));
+    return List.of(new SimpleGrantedAuthority(roles.getClass().toString()));
   }
 
   @Override

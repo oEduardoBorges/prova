@@ -7,15 +7,20 @@ import com.oEduardoBorges.config.JwtService;
 import com.oEduardoBorges.model.Role;
 import com.oEduardoBorges.model.User;
 import com.oEduardoBorges.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
+
   private final UserRepository repository;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
@@ -27,7 +32,7 @@ public class AuthenticationService {
         .email(request.getEmail())
         .username(request.getUsername())
         .password(passwordEncoder.encode(request.getPassword()))
-        .role(Role.USER)
+        .roles(new HashSet<>(Arrays.asList(new Role(2L, "ROLE_USER"))))
         .build();
     repository.save(user);
     var jwtToken = jwtService.generateToken(user);
