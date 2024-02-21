@@ -1,6 +1,5 @@
 package com.oEduardoBorges.model;
 
-import com.oEduardoBorges.dto.request.user.UserRequestUpdate;
 import jakarta.persistence.*;
 
 import java.util.Collection;
@@ -25,7 +24,7 @@ public class User implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private String nome;
+  private String name;
   private String email;
   private String username;
   private String password;

@@ -10,13 +10,13 @@ import lombok.*;
 @NoArgsConstructor
 public class UserRequestUpdate {
 
-    private String nome;
+    private String name;
     private String email;
     private String username;
     private String password;
 
     public UserRequestUpdate(User user) {
-        nome = user.getNome();
+        name = user.getName();
         email = user.getEmail();
         username = user.getUsername();
         password = user.getPassword();

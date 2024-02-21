@@ -14,8 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-
 
 @Service
 @RequiredArgsConstructor
@@ -33,9 +31,9 @@ public class UserService {
     public UserResponse userUpdate(Long id, UserRequestUpdate userUpdate) {
         try {
             User user = userRepository.getReferenceById(id);
-            user.setNome(userUpdate.getNome());
+            user.setName(userUpdate.getName());
             user.setUsername(userUpdate.getUsername());
-            user.setEmail(userUpdate.getNome());
+            user.setEmail(userUpdate.getName());
             String encodedPassword = passwordEncoder.encode(userUpdate.getPassword());
             user.setPassword(encodedPassword);
             user = userRepository.save(user);
