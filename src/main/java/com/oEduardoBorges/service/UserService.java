@@ -1,7 +1,10 @@
 package com.oEduardoBorges.service;
 
 import com.oEduardoBorges.dto.request.user.UserRequestUpdate;
+import com.oEduardoBorges.dto.response.tela.TelaResponse;
 import com.oEduardoBorges.dto.response.user.UserResponse;
+import com.oEduardoBorges.dto.response.user.UserRoleResponse;
+import com.oEduardoBorges.model.Tela;
 import com.oEduardoBorges.model.User;
 import com.oEduardoBorges.repository.UserRepository;
 import com.oEduardoBorges.service.exceptions.DatabaseException;
@@ -14,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -54,5 +59,11 @@ public class UserService {
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Falha de integridade referencial");
         }
+    }
+
+    public Optional<UserRoleResponse> findUserRoleById(Long id) {
+        Optional<User> telaById = Optional.ofNullable(userRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("User não encontrado")));
+        return telaById.map(UserRoleResponse::new);
     }
 }

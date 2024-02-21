@@ -12,19 +12,19 @@ import lombok.*;
 public class UserResponse {
 
     private Long id;
-    private String name;
+    private String nome;
     private String email;
     private String username;
 
-    public UserResponse(User entity) {
-        id = entity.getId();
-        name = entity.getName();
-        email = entity.getEmail();
-        username = entity.getUsername();
+    public UserResponse(User user) {
+        id = user.getId();
+        nome = user.getName();
+        email = user.getEmail();
+        username = user.getUsername();
     }
 
     public UserResponse(UserRequestUpdate userRequestUpdate) {
-        name = userRequestUpdate.getName();
+        nome = userRequestUpdate.getName();
         email = userRequestUpdate.getEmail();
         username = userRequestUpdate.getUsername();
     }

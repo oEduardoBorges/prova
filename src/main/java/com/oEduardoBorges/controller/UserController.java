@@ -1,7 +1,9 @@
 package com.oEduardoBorges.controller;
 
 import com.oEduardoBorges.dto.request.user.UserRequestUpdate;
+import com.oEduardoBorges.dto.response.tela.TelaResponse;
 import com.oEduardoBorges.dto.response.user.UserResponse;
+import com.oEduardoBorges.dto.response.user.UserRoleResponse;
 import com.oEduardoBorges.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
@@ -39,5 +43,10 @@ public class UserController {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         userService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @GetMapping("role/{id}")
+    public ResponseEntity<Optional<UserRoleResponse>> findUserRoleById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findUserRoleById(id));
     }
 }
