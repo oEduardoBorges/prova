@@ -1,6 +1,5 @@
 package com.oEduardoBorges.dto.response.role;
 
-import com.oEduardoBorges.dto.request.role.RoleRequest;
 import com.oEduardoBorges.model.Role;
 import lombok.*;
 

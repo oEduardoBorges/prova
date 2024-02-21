@@ -1,7 +1,6 @@
 package com.oEduardoBorges.model;
 
 import com.oEduardoBorges.dto.request.role.RoleRequest;
-import com.oEduardoBorges.dto.request.tela.TelaRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

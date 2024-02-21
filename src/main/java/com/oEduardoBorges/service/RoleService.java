@@ -28,7 +28,7 @@ public class RoleService {
 
     public Optional<RoleResponse> findRoleById(Long id) {
         Optional<Role> roleById = Optional.ofNullable(roleRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Permissão não encontrado")));
+                () -> new ResourceNotFoundException("Permissão não encontrado.")));
         return roleById.map(RoleResponse::new);
     }
 
@@ -37,7 +37,7 @@ public class RoleService {
         boolean exists = roleRepository.existsByAuthority(roleRequest.getAuthority());
 
         if(exists){
-            throw new DatabaseException("Permissao já existente");
+            throw new DatabaseException("Permissao já existente.");
         }
         Role role = roleRepository.save(new Role(roleRequest));
         return new RoleResponse(role);
@@ -51,20 +51,20 @@ public class RoleService {
             role = roleRepository.save(role);
             return new RoleResponse(role);
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Id não encontrado" + id);
+            throw new ResourceNotFoundException("Id não encontrado: " + id);
         }
     }
 
     @Transactional
     public void delete(Long id) {
         if (!roleRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Permissão não encontrado");
+            throw new ResourceNotFoundException("Permissão não encontrado.");
         }
         try {
             roleRepository.deleteById(id);
         }
         catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Falha de integridade referencial");
+            throw new DatabaseException("Falha de integridade referencial.");
         }
     }
 }

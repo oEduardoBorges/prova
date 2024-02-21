@@ -45,35 +45,35 @@ public class UserService {
             user = userRepository.save(user);
             return new UserResponse(user);
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Id não encontrado" + id);
+            throw new ResourceNotFoundException("Id não encontrado: " + id);
         }
     }
 
     @Transactional
     public void delete(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Usuário não encontrado");
+            throw new ResourceNotFoundException("Usuário não encontrado.");
         }
         try {
             userRepository.deleteById(id);
         }
         catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Falha de integridade referencial");
+            throw new DatabaseException("Falha de integridade referencial.");
         }
     }
 
     public Optional<UserRoleResponse> findUserRoleById(Long id) {
         Optional<User> telaById = Optional.ofNullable(userRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("User não encontrado")));
+                () -> new ResourceNotFoundException("User não encontrado.")));
         return telaById.map(UserRoleResponse::new);
     }
 
     @Transactional
     public void addRoleToUser(Long userId, Long roleId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com o ID: " + userId));
         Role role = roleRepository.findById(roleId)
-                .orElseThrow(() -> new EntityNotFoundException("Role not found with id: " + roleId));
+                .orElseThrow(() -> new EntityNotFoundException("Permissão não encontrada com o ID: " + roleId));
 
         user.getRoles().add(role);
         userRepository.save(user);
@@ -82,9 +82,9 @@ public class UserService {
     @Transactional
     public void removeRoleFromUser(Long userId, Long roleId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com o ID: " + userId));
         Role role = roleRepository.findById(roleId)
-                .orElseThrow(() -> new EntityNotFoundException("Role not found with id: " + roleId));
+                .orElseThrow(() -> new EntityNotFoundException("Permissão não encontrada com o ID: " + roleId));
 
         user.getRoles().remove(role);
         userRepository.save(user);

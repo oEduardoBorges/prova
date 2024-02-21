@@ -28,7 +28,7 @@ public class TelaService {
 
     public Optional<TelaResponse> findTelaById(Long id) {
         Optional<Tela> telaById = Optional.ofNullable(telaRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Tela não encontrado")));
+                () -> new ResourceNotFoundException("Tela não encontrado.")));
         return telaById.map(TelaResponse::new);
     }
 
@@ -37,7 +37,7 @@ public class TelaService {
         boolean exists = telaRepository.existsByName(telaRequest.getName());
 
         if(exists){
-            throw new DatabaseException("Tela já cadastrada com esse nome");
+            throw new DatabaseException("Tela já cadastrada com esse nome.");
         }
         Tela tela = telaRepository.save(new Tela(telaRequest));
         return new TelaResponse(tela);
@@ -52,20 +52,20 @@ public class TelaService {
             tela = telaRepository.save(tela);
             return new TelaResponse(tela);
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Id não encontrado" + id);
+            throw new ResourceNotFoundException("Id não encontrado." + id);
         }
     }
 
     @Transactional
     public void delete(Long id) {
         if (!telaRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Tela não encontrado");
+            throw new ResourceNotFoundException("Tela não encontrado.");
         }
         try {
             telaRepository.deleteById(id);
         }
         catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Falha de integridade referencial");
+            throw new DatabaseException("Falha de integridade referencial.");
         }
     }
 }

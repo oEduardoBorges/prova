@@ -1,7 +1,6 @@
 package com.oEduardoBorges.dto.response.tela;
 
 import com.oEduardoBorges.model.Tela;
-import lombok.Builder;
 import lombok.*;
 
 

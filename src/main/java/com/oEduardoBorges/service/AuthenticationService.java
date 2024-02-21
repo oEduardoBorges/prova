@@ -68,7 +68,7 @@ public class AuthenticationService {
       return userRepository.findByEmail(username).get();
 
     }catch (Exception e){
-      throw new UsernameNotFoundException("Email not found");
+      throw new UsernameNotFoundException("Email não encontrado.");
     }
   }
 }
