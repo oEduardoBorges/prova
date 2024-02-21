@@ -49,4 +49,16 @@ public class UserController {
     public ResponseEntity<Optional<UserRoleResponse>> findUserRoleById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findUserRoleById(id));
     }
+
+    @PutMapping("/{userId}/roles/{roleId}")
+    public ResponseEntity<String> addRoleToUser(@PathVariable Long userId, @PathVariable Long roleId) {
+        userService.addRoleToUser(userId, roleId);
+        return ResponseEntity.status(HttpStatus.OK).body("Role added to user successfully");
+    }
+
+    @DeleteMapping("/{userId}/roles/{roleId}")
+    public ResponseEntity<String> removeRoleFromUser(@PathVariable Long userId, @PathVariable Long roleId) {
+        userService.removeRoleFromUser(userId, roleId);
+        return ResponseEntity.status(HttpStatus.OK).body("Role removed from user successfully");
+    }
 }

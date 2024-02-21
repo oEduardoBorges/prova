@@ -4,8 +4,10 @@ import com.oEduardoBorges.dto.request.user.UserRequestUpdate;
 import com.oEduardoBorges.dto.response.tela.TelaResponse;
 import com.oEduardoBorges.dto.response.user.UserResponse;
 import com.oEduardoBorges.dto.response.user.UserRoleResponse;
+import com.oEduardoBorges.model.Role;
 import com.oEduardoBorges.model.Tela;
 import com.oEduardoBorges.model.User;
+import com.oEduardoBorges.repository.RoleRepository;
 import com.oEduardoBorges.repository.UserRepository;
 import com.oEduardoBorges.service.exceptions.DatabaseException;
 import com.oEduardoBorges.service.exceptions.ResourceNotFoundException;
@@ -25,6 +27,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     public Page<UserResponse> userList(Pageable pageable) {
@@ -65,5 +68,25 @@ public class UserService {
         Optional<User> telaById = Optional.ofNullable(userRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("User não encontrado")));
         return telaById.map(UserRoleResponse::new);
+    }
+
+    public void addRoleToUser(Long userId, Long roleId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new EntityNotFoundException("Role not found with id: " + roleId));
+
+        user.getRoles().add(role);
+        userRepository.save(user);
+    }
+
+    public void removeRoleFromUser(Long userId, Long roleId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new EntityNotFoundException("Role not found with id: " + roleId));
+
+        user.getRoles().remove(role);
+        userRepository.save(user);
     }
 }
