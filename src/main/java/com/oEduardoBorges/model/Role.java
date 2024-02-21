@@ -1,5 +1,7 @@
 package com.oEduardoBorges.model;
 
+import com.oEduardoBorges.dto.request.role.RoleRequest;
+import com.oEduardoBorges.dto.request.tela.TelaRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,10 +16,15 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_role")
 public class Role implements GrantedAuthority {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String authority;
+
+  public Role(RoleRequest roleRequest) {
+    this.authority = roleRequest.getAuthority();
+  }
 
   @Override
   public String getAuthority() {

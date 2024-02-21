@@ -1,11 +1,8 @@
 package com.oEduardoBorges.service;
 
 import com.oEduardoBorges.dto.request.tela.TelaRequest;
-import com.oEduardoBorges.dto.request.user.UserRequestUpdate;
 import com.oEduardoBorges.dto.response.tela.TelaResponse;
-import com.oEduardoBorges.dto.response.user.UserResponse;
 import com.oEduardoBorges.model.Tela;
-import com.oEduardoBorges.model.User;
 import com.oEduardoBorges.repository.TelaRepository;
 import com.oEduardoBorges.service.exceptions.DatabaseException;
 import com.oEduardoBorges.service.exceptions.ResourceNotFoundException;
