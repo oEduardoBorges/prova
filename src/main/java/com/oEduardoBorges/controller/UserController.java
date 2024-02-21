@@ -62,7 +62,7 @@ public class UserController {
     @PutMapping("/{userId}/roles/{roleId}")
     public ResponseEntity<String> addRoleToUser(@PathVariable Long userId, @PathVariable Long roleId) {
         userService.addRoleToUser(userId, roleId);
-        return ResponseEntity.status(HttpStatus.OK).body("Role added to user successfully");
+        return ResponseEntity.status(HttpStatus.OK).body("Permissão adicionada ao usuário com sucesso.");
     }
 
     @Operation(summary = "Remover permissão de um usuário.")
@@ -70,6 +70,6 @@ public class UserController {
     @DeleteMapping("/{userId}/roles/{roleId}")
     public ResponseEntity<String> removeRoleFromUser(@PathVariable Long userId, @PathVariable Long roleId) {
         userService.removeRoleFromUser(userId, roleId);
-        return ResponseEntity.status(HttpStatus.OK).body("Role removed from user successfully");
+        return ResponseEntity.status(HttpStatus.OK).body("Permissão adicionada ao usuário com sucesso.");
     }
 }
