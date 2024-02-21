@@ -1,2 +1,8 @@
-package com.oEduardoBorges.service.exceptions;public class ResourceNotFoundException {
+package com.oEduardoBorges.service.exceptions;
+
+public class ResourceNotFoundException extends RuntimeException{
+
+    public ResourceNotFoundException(String msg){
+        super(msg);
+    }
 }

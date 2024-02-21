@@ -1,5 +1,6 @@
 package com.oEduardoBorges.model;
 
+import com.oEduardoBorges.dto.request.user.UserRequestUpdate;
 import jakarta.persistence.*;
 
 import java.util.Collection;
