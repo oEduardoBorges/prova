@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -21,6 +23,17 @@ public class Role implements GrantedAuthority {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String authority;
+
+  @ManyToMany
+  @JoinTable(name = "tb_permissao_tela",
+          joinColumns = @JoinColumn(name = "permissao_id"),
+          inverseJoinColumns = @JoinColumn(name = "tela_id"))
+  private Set<Tela> telas = new HashSet<>();
+
+  public Role(Long id, String authority) {
+    this.id = id;
+    this.authority = authority;
+  }
 
   public Role(RoleRequest roleRequest) {
     this.authority = roleRequest.getAuthority();
