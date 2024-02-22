@@ -17,6 +17,10 @@
 
 #
 
+No PostgreSQL, criar a DataBase com o nome: desafio
+
+#
+
 - ### _Usuários para se autenticar:_
 ```
 {
