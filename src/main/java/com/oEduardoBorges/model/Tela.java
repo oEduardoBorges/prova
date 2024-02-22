@@ -2,6 +2,7 @@ package com.oEduardoBorges.model;
 
 import com.oEduardoBorges.dto.request.tela.TelaRequest;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 @Builder
@@ -16,7 +17,11 @@ public class Tela {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotEmpty
     private String name;
+
+    @NotEmpty
     private String description;
 
     public Tela(TelaRequest telaRequest) {

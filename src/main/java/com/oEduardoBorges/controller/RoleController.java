@@ -5,6 +5,7 @@ import com.oEduardoBorges.dto.response.role.RoleResponse;
 import com.oEduardoBorges.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class RoleController {
     @Operation(summary = "Criar uma nova permissão.")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public ResponseEntity<RoleResponse> createRole(@RequestBody RoleRequest roleRequest) {
+    public ResponseEntity<RoleResponse> createRole(@RequestBody @Valid RoleRequest roleRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(roleService.createRole(roleRequest));
     }
 
@@ -44,7 +45,7 @@ public class RoleController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
     @Transactional
-    public ResponseEntity<RoleResponse> roleUpdate(@PathVariable Long id, @RequestBody RoleRequest roleRequest){
+    public ResponseEntity<RoleResponse> roleUpdate(@PathVariable Long id, @RequestBody @Valid  RoleRequest roleRequest){
         RoleResponse roleResponse = roleService.RoleUpdate(id, roleRequest);
         return ResponseEntity.status(HttpStatus.OK).body(roleResponse);
     }

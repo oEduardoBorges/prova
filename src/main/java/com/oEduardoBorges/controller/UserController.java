@@ -5,6 +5,7 @@ import com.oEduardoBorges.dto.response.user.UserResponse;
 import com.oEduardoBorges.dto.response.user.UserRoleResponse;
 import com.oEduardoBorges.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,7 +39,7 @@ public class UserController {
     @Operation(summary = "Atualizar usuário.")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserResponse> userUpdate(@PathVariable Long id, @RequestBody UserRequestUpdate userRequest){
+    public ResponseEntity<UserResponse> userUpdate(@PathVariable Long id, @RequestBody @Valid UserRequestUpdate userRequest){
         UserResponse userResponse = userService.userUpdate(id, userRequest);
         return ResponseEntity.status(HttpStatus.OK).body(userResponse);
     }

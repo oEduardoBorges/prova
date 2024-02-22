@@ -1,6 +1,8 @@
 package com.oEduardoBorges.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,9 +25,20 @@ public class User implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  @NotEmpty
   private String name;
+
+  @NotEmpty
+  @Email
+  @Column(unique = true)
   private String email;
+
+  @NotEmpty
+  @Column(unique = true)
   private String username;
+
+  @NotEmpty
   private String password;
 
   @ManyToMany(fetch = FetchType.EAGER)

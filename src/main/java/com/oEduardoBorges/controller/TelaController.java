@@ -4,6 +4,7 @@ import com.oEduardoBorges.dto.request.tela.TelaRequest;
 import com.oEduardoBorges.dto.response.tela.TelaResponse;
 import com.oEduardoBorges.service.TelaService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,14 +36,14 @@ public class TelaController {
     @Operation(summary = "Criar uma nova tela.")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public ResponseEntity<TelaResponse> createTela(@RequestBody TelaRequest telaRequest) {
+    public ResponseEntity<TelaResponse> createTela(@RequestBody @Valid  TelaRequest telaRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(telaService.createTela(telaRequest));
     }
 
     @Operation(summary = "Atualizar uma tela.")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
-    public ResponseEntity<TelaResponse> telaUpdate(@PathVariable Long id, @RequestBody TelaRequest telaRequest){
+    public ResponseEntity<TelaResponse> telaUpdate(@PathVariable Long id, @RequestBody @Valid TelaRequest telaRequest){
         TelaResponse telaResponse = telaService.telaUpdate(id, telaRequest);
         return ResponseEntity.status(HttpStatus.OK).body(telaResponse);
     }

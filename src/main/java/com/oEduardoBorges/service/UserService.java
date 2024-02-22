@@ -39,7 +39,7 @@ public class UserService {
             User user = userRepository.getReferenceById(id);
             user.setName(userUpdate.getName());
             user.setUsername(userUpdate.getUsername());
-            user.setEmail(userUpdate.getName());
+            user.setEmail(userUpdate.getEmail());
             String encodedPassword = passwordEncoder.encode(userUpdate.getPassword());
             user.setPassword(encodedPassword);
             user = userRepository.save(user);

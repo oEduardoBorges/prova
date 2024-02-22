@@ -2,6 +2,7 @@ package com.oEduardoBorges.model;
 
 import com.oEduardoBorges.dto.request.role.RoleRequest;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -21,6 +22,8 @@ public class Role implements GrantedAuthority {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  @NotEmpty
   private String authority;
 
   @ManyToMany(fetch = FetchType.EAGER)
