@@ -6,6 +6,7 @@
   - Swagger/OpenAPI
   - JWT
   - Oauth0
+  - Lombok
 #
 
 ### 📄 **Documentação**

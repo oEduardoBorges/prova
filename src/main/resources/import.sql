@@ -11,6 +11,5 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 2);
 
-INSERT INTO tb_tela (name, description) VALUES ('Tela Principal', 'Tela principal do sistema'), ('Tela Secundário', 'Tela secundária do sistema');
-
-INSERT INTO tb_permissao_tela (permissao_id, tela_id) VALUES (1, 1), (1, 2), (2, 2);
+INSERT INTO tb_tela (name, description) VALUES ('Tela Principal', 'Tela principal do sistema');
+INSERT INTO tb_tela (name, description) VALUES ('Tela Secundário', 'Tela secundária do sistema');
