@@ -1,4 +1,4 @@
-# Projeto: API Restful com Spring Boot e banco de dados PostgreSQL.
+# Projeto com Spring Boot e banco de dados PostgreSQL.
 
 - ### _Recursos utilizados no desenvolvimento:_ 
   - SpringBoot
